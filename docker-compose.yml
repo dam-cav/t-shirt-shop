@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  # NOTE from me: connect via shell using this
+  # `mysql -u root -pshirt -h 127.0.0.1 --port 1234`
+  db:
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: shirt
+    ports:
+      - 1234:3306
+    volumes:
+      - tshirt_mysql_volume:/var/lib/mysql
+
+volumes:
+  tshirt_mysql_volume:
