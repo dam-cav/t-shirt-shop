@@ -1,0 +1,7 @@
+/* devise confirmations and warnings */
+.notice {
+  color: green;
+}
+.alert {
+  color: red;
+}

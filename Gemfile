@@ -53,6 +53,9 @@ gem 'bootsnap', require: false
 # replace erb with slim
 gem 'slim-rails'
 
+# user authentication
+gem 'devise'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
