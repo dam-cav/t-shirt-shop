@@ -1,0 +1,13 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+
+# disable "Missing top-level documentation comment for module FooBar"
+Style/Documentation:
+  Enabled: false
+
+# I want to bulk change in some migrations
+Rails/BulkChangeTable:
+  Enabled: false
