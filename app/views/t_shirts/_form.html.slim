@@ -1,0 +1,10 @@
+= form_with(model: @t_shirt) do |form|
+  - if @t_shirt.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@t_shirt.errors.count, "error")} prohibited this t_shirt from being saved:"
+      ul
+        - @t_shirt.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.submit

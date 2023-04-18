@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 T shirts
+
+#t_shirts
+  - @t_shirts.each do |t_shirt|
+    == render t_shirt
+    p
+      = link_to "Show this t shirt", t_shirt
+
+= link_to "New t shirt", new_t_shirt_path
