@@ -6,7 +6,7 @@ class TShirtsController < ApplicationController
 
   # GET /t_shirts or /t_shirts.json
   def index
-    @t_shirts = TShirt.all
+    @pagy, @t_shirts = pagy(TShirt.all)
   end
 
   # GET /t_shirts/1 or /t_shirts/1.json
