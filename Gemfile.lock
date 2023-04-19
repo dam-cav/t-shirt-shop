@@ -262,12 +262,12 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  bootsnap
+  bootsnap (~> 1.16.0)
   capybara
   debug
-  devise
-  jbuilder
-  jsbundling-rails
+  devise (~> 4.9.2)
+  jbuilder (~> 2.11.5)
+  jsbundling-rails (~> 1.1.1)
   mysql2 (~> 0.5)
   pagy (~> 6.0)
   puma (~> 5.0)
@@ -275,11 +275,11 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   selenium-webdriver
-  simple_form
-  slim-rails
-  sprockets-rails
-  stimulus-rails
-  turbo-rails
+  simple_form (~> 5.2.0)
+  slim-rails (~> 3.6.2)
+  sprockets-rails (~> 3.4.2)
+  stimulus-rails (~> 1.2.1)
+  turbo-rails (~> 1.4.0)
   tzinfo-data
   web-console
   webdrivers

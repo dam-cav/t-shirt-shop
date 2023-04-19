@@ -9,7 +9,7 @@ ruby '3.1.1'
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
+gem 'sprockets-rails', '~> 3.4.2'
 
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
@@ -18,16 +18,16 @@ gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails'
+gem 'jsbundling-rails', '~> 1.1.1'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 1.4.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails'
+gem 'stimulus-rails', '~> 1.2.1'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder'
+gem 'jbuilder', '~> 2.11.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -42,7 +42,7 @@ gem 'jbuilder'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.16.0', require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -51,13 +51,13 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 # replace erb with slim
-gem 'slim-rails'
+gem 'slim-rails', '~> 3.6.2'
 
 # user authentication
-gem 'devise'
+gem 'devise', '~> 4.9.2'
 
 # forms
-gem 'simple_form'
+gem 'simple_form', '~> 5.2.0'
 
 # pagination
 gem 'pagy', '~> 6.0'
