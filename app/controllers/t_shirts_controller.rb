@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TShirtsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_t_shirt, only: %i[show edit update destroy]
 
   # GET /t_shirts or /t_shirts.json
@@ -66,6 +67,17 @@ class TShirtsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def t_shirt_params
-    params.fetch(:t_shirt, {})
+    permitted = params.fetch(:t_shirt, {}).permit(
+      :brand,
+      :color,
+      :name,
+      :price,
+      :quantity,
+    )
+
+    # convert price to cents
+    permitted[:price] = (permitted[:price].to_f * 100).to_i if permitted[:price]
+
+    permitted
   end
 end

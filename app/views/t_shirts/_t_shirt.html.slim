@@ -1,1 +1,5 @@
-div id="#{dom_id t_shirt}"
+table id="#{dom_id t_shirt}"
+  - t_shirt.attributes.each do |key, value|
+    tr
+      td = key
+      td = value

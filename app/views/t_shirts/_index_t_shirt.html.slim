@@ -1,0 +1,17 @@
+tr.shirt__index-container
+  td.shirt__index-image
+    = link_to '[IMAGE]', t_shirt
+
+  td.shirt__index-info
+    = link_to t_shirt.name, t_shirt
+    P = t_shirt.brand
+    p = t_shirt.color
+    p
+      = t_shirt.quantity
+      | &nbsp;disponibili
+
+  td.shirt__index-price
+    p = display_price(t_shirt.euro_price)
+
+  td.shirt__index-cart
+    button + Cart

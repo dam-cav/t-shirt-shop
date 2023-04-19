@@ -14,4 +14,9 @@
 #  updated_at :datetime         not null
 #
 class TShirt < ApplicationRecord
+  validates :name, :price, :quantity, presence: true
+
+  def euro_price
+    price.to_f / 100
+  end
 end
