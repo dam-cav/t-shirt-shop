@@ -3,3 +3,13 @@
   padding: 0 15px;
   margin: auto;
 }
+
+table.index-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.index-table,
+table.index-table tr,
+table.index-table td {
+  border: 1px solid black;
+}
