@@ -1,0 +1,28 @@
+h1 Your cart
+
+table.index-table#t_shirts
+  - @user_cart_t_shirts.each do |user_cart_t_shirt|
+    = render 'carts/cart_t_shirt', user_cart_t_shirt: user_cart_t_shirt
+
+| TOTALE
+br
+= display_euro_price(@total)
+
+
+javascript:
+  // NOTE: note will update page body without reloading it
+  document.addEventListener("turbo:load", function (e) {
+    const enableEditor = function(event) {
+      const cartShirtId = event.target.getAttribute('data-tshirt-cart-quantity')
+      const cartShirtQuantityEditor = document.querySelector(`form[data-tshirt-cart-quantity-editor="${cartShirtId}"]`)
+      if (cartShirtQuantityEditor.style.display === 'none') {
+        event.target.style.display = 'none'
+        cartShirtQuantityEditor.style.display = 'block'
+      }
+    }
+
+    document.querySelectorAll('div[data-tshirt-cart-quantity]').forEach(
+      cartQuantity => {
+        cartQuantity.onclick = enableEditor
+      })
+  })

@@ -1,4 +1,4 @@
-tr.shirt__index-container
+tr.shirt__index-container(id="shirt-#{t_shirt.id}__index-container")
   td.shirt__index-image
     = link_to '[IMAGE]', t_shirt
 
@@ -12,6 +12,3 @@ tr.shirt__index-container
 
   td.shirt__index-price
     p = display_price(t_shirt.euro_price)
-
-  td.shirt__index-cart
-    button + Cart

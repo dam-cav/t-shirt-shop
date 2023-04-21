@@ -16,6 +16,8 @@
 class TShirt < ApplicationRecord
   validates :name, :price, :quantity, presence: true
 
+  has_many :user_cart_t_shirts, dependent: :destroy
+
   def euro_price
     price.to_f / 100
   end

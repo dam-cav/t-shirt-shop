@@ -1,5 +1,23 @@
-table id="#{dom_id t_shirt}"
-  - t_shirt.attributes.each do |key, value|
-    tr
-      td = key
-      td = value
+table.index-table
+  tr.shirt__index-container
+    td.shirt__index-image
+      = link_to '[IMAGE]', t_shirt
+
+    td.shirt__index-info
+      = link_to t_shirt.name, t_shirt
+      P = t_shirt.brand
+      p = t_shirt.color
+      p
+        = t_shirt.quantity
+        | &nbsp;disponibili
+
+    td.shirt__index-price
+      p = display_price(t_shirt.euro_price)
+
+    td.shirt__index-cart
+      = simple_form_for :user_cart_t_shirt, url: update_cart_quantity_user_cart_t_shirts_path, remote: true, method: :post do |f|
+        = f.hidden_field :t_shirt_id, value: t_shirt.id
+        = f.input :quantity, as: :numeric, \
+                  input_html: { value: t_shirt.user_cart_t_shirts.find_by(user: current_user)&.quantity || 0 }
+
+        = f.button :submit, 'Salva'

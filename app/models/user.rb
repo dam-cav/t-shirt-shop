@@ -23,4 +23,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :user_cart_t_shirts, dependent: :destroy
+
+  def cart_size
+    size = UserCartTShirt.where(user_id: self.id)
+                         .group(:user_id)
+                         .order(:user_id)
+                         .select('SUM(quantity) as cart_size')
+                         .first&.cart_size
+
+    size || 0
+  end
 end

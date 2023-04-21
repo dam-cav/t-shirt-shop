@@ -1,0 +1,39 @@
+- t_shirt = user_cart_t_shirt.t_shirt
+
+tr.shirt__index-container(id="shirt-#{t_shirt.id}__cart-container")
+  td.shirt__index-image
+    = link_to '[IMAGE]', t_shirt
+
+  td.shirt__index-info
+    = link_to t_shirt.name, t_shirt
+    P = t_shirt.brand
+    p = t_shirt.color
+
+  td.shirt__index-price
+    p = display_price(t_shirt.euro_price)
+
+  td.shirt__index-cart
+    - if t_shirt.quantity < user_cart_t_shirt.quantity
+      | &#9888; solo&nbsp;
+      = t_shirt.quantity
+      | &nbsp;disponibili
+
+    div(data-tshirt-cart-quantity=user_cart_t_shirt.id)
+      = user_cart_t_shirt.quantity
+      | &nbsp;in carrello &#9998;
+    = simple_form_for :user_cart_t_shirt, url: update_cart_quantity_user_cart_t_shirts_path, \
+      remote: true, \
+      method: :post, \
+      html: { \
+        data: { 'tshirt-cart-quantity-editor': user_cart_t_shirt.id }, \
+        style: 'display: none' \
+      } do |f|
+      = f.hidden_field :t_shirt_id, value: t_shirt.id
+      = f.input :quantity, as: :numeric, \
+                input_html: { value: t_shirt.user_cart_t_shirts.find_by(user: current_user)&.quantity || 0 }, \
+                label: false
+
+
+      = f.button :submit, 'Aggiorna'
+
+    = display_euro_price(t_shirt.price * user_cart_t_shirt.quantity)

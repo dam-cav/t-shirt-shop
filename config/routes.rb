@@ -7,6 +7,12 @@ Rails.application.routes.draw do
 
   resources :t_shirts
 
+  get '/cart', to: 'carts#show', as: 'cart_show'
+
+  resources :user_cart_t_shirts, only: [] do
+    post 'update_cart_quantity', on: :collection
+  end
+
   # Defines the root path route ("/")
   root 't_shirts#index'
 end
