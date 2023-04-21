@@ -14,8 +14,8 @@ class UserCartTShirtsController < ApplicationController
       user_cart_t_shirt.destroy!
     elsif new_quantity.positive?
       UserCartTShirt.create!(user_id: current_user.id,
-                                                 t_shirt_id: shirt_to_add_id,
-                                                 quantity: new_quantity)
+                             t_shirt_id: shirt_to_add_id,
+                             quantity: new_quantity)
     end
 
     redirect_to cart_show_path

@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def cart_size
-    size = UserCartTShirt.where(user_id: self.id)
+    size = UserCartTShirt.where(user_id: id)
                          .group(:user_id)
                          .order(:user_id)
                          .select('SUM(quantity) as cart_size')
