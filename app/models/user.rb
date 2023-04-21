@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
+#  wallet_money           :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -25,6 +26,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :user_cart_t_shirts, dependent: :destroy
+
+  def euro_wallet_money
+    wallet_money.to_f / 100
+  end
 
   def cart_size
     size = UserCartTShirt.where(user_id: self.id)

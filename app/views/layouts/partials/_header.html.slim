@@ -6,6 +6,9 @@
     = link_to cart_show_path, id: "user_cart_count" do
       | Cart:&nbsp;
       = current_user.cart_size
+    .header__wallet-money
+      | Wallet:&nbsp;
+      = display_price(current_user.euro_wallet_money)
     = link_to 'Logout', destroy_user_session_path, data: { 'turbo-method': :delete }
   - else
     = link_to 'Login', new_user_session_path
