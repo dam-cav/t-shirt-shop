@@ -3,6 +3,8 @@
     h1 T-SHIRT SHOP
 
   - if current_user.present?
+    = link_to orders_path do
+      | Orders
     = link_to cart_show_path, id: "user_cart_count" do
       | Cart:&nbsp;
       = current_user.cart_size
