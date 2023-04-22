@@ -1,0 +1,31 @@
+table.index-table(id="#{dom_id order}")
+  - order.attributes.except("user_id", "updated_at").each do |key, value|
+    tr
+      td = key
+      td = value
+
+  tr
+    td total_quantity
+    td = order.total_quantity
+
+  tr
+    td total_price
+    td = display_euro_price(order.total_price)
+
+  tr
+    td products
+    td(style="padding: 5px;")
+      table.index-table
+        - order.order_t_shirts.each do |o_t_s|
+          tr
+            td(colspan="2")
+              h3 = link_to o_t_s.t_shirt.name, o_t_s.t_shirt
+          tr
+            td quantity
+            td = o_t_s.quantity
+          tr
+            td price per piece
+            td = display_euro_price(o_t_s.final_price)
+          tr
+            td total price
+            td = display_euro_price(o_t_s.final_price * o_t_s.quantity)

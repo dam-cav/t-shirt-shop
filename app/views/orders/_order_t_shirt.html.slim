@@ -1,0 +1,25 @@
+- t_shirt = user_cart_t_shirt.t_shirt
+
+tr.shirt__index-container(id="shirt-#{t_shirt.id}__cart-container")
+  td.shirt__index-image
+    = link_to "[IMAGE #{t_shirt.name}]", t_shirt
+
+  td.shirt__index-info
+    = link_to t_shirt.name, t_shirt
+    P = t_shirt.brand
+    p = t_shirt.color
+
+  td.shirt__index-price
+    p = display_price(t_shirt.euro_price)
+
+  td.shirt__index-cart
+    - if t_shirt.quantity < user_cart_t_shirt.quantity
+      | &#9888; solo&nbsp;
+      = t_shirt.quantity
+      | &nbsp;disponibili
+
+    div(data-tshirt-cart-quantity=user_cart_t_shirt.id)
+      | Quanitità&nbsp;
+      = user_cart_t_shirt.quantity
+
+    = display_euro_price(t_shirt.price * user_cart_t_shirt.quantity)
