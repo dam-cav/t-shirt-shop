@@ -1,7 +1,7 @@
 table.index-table
   tr.shirt__index-container
     td.shirt__index-image
-      = link_to '[IMAGE]', t_shirt
+      = link_to "[IMAGE #{t_shirt.name}]", t_shirt
 
     td.shirt__index-info
       = link_to t_shirt.name, t_shirt
