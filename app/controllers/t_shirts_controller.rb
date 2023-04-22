@@ -1,12 +1,21 @@
 # frozen_string_literal: true
 
 class TShirtsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_t_shirt, only: %i[show edit update destroy]
 
   # GET /t_shirts or /t_shirts.json
   def index
-    @pagy, @t_shirts = pagy(TShirt.all)
+    # TODO: se non sei un seller, filtra via quelle con quantità zero????
+
+    t_shirts = TShirt.all
+    # t_shirts = t_shirts.includes(:user_cart_t_shirts) unless current_user.nil?
+    # unless current_user.nil?
+    #   t_shirts = t_shirts.left_joins(:user_cart_t_shirts)
+    #                      .where('user_cart_t_shirts.user_id = ? OR user_cart_t_shirts.user_id IS NULL', current_user.id)
+    # end
+
+    @pagy, @t_shirts = pagy(t_shirts)
   end
 
   # GET /t_shirts/1 or /t_shirts/1.json
@@ -72,7 +81,7 @@ class TShirtsController < ApplicationController
       :color,
       :name,
       :price,
-      :quantity,
+      :quantity
     )
 
     # convert price to cents
