@@ -10,13 +10,17 @@ class UserCartTShirtsController < ApplicationController
     user_cart_t_shirt = UserCartTShirt.find_by(user_id: current_user.id,
                                                t_shirt_id: shirt_to_add_id)
 
-    authorize user_cart_t_shirt, :update_cart_quantity?
-
     if user_cart_t_shirt.present? && new_quantity.positive?
+      authorize user_cart_t_shirt, :update_cart_quantity?
+
       user_cart_t_shirt.update(quantity: new_quantity)
     elsif user_cart_t_shirt.present?
+      authorize user_cart_t_shirt, :update_cart_quantity?
+
       user_cart_t_shirt.destroy!
     elsif new_quantity.positive?
+      authorize UserCartTShirt, :update_cart_quantity?
+
       UserCartTShirt.create!(user_id: current_user.id,
                              t_shirt_id: shirt_to_add_id,
                              quantity: new_quantity)
