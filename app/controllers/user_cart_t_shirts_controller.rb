@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class UserCartTShirtsController < ApplicationController
+  after_action :verify_authorized
+
   def update_cart_quantity
     shirt_to_add_id = user_cart_t_shirt_params[:t_shirt_id]
     new_quantity = user_cart_t_shirt_params[:quantity]&.to_i
 
     user_cart_t_shirt = UserCartTShirt.find_by(user_id: current_user.id,
                                                t_shirt_id: shirt_to_add_id)
+
+    authorize user_cart_t_shirt, :update_cart_quantity?
 
     if user_cart_t_shirt.present? && new_quantity.positive?
       user_cart_t_shirt.update(quantity: new_quantity)

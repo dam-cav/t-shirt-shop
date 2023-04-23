@@ -4,7 +4,7 @@ table.index-table#t_shirts
   - @t_shirts.each do |t_shirt|
     = render 't_shirts/index_t_shirt', t_shirt: t_shirt
 
-- if current_user.present?
+- if policy(TShirt).new?
   = link_to "New t shirt", new_t_shirt_path
 
 == pagy_nav(@pagy)

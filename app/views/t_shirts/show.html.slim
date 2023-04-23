@@ -3,8 +3,10 @@ h1 = @t_shirt.name
 == render @t_shirt
 
 div
-  => link_to "Edit this t shirt", edit_t_shirt_path(@t_shirt)
-  '|
-  =< link_to "Back to t shirts", t_shirts_path
+  = link_to "Back to t shirts", t_shirts_path
 
-  = button_to "Destroy this t shirt", @t_shirt, method: :delete
+  - if policy(TShirt).edit?
+    = link_to "Edit this t shirt", edit_t_shirt_path(@t_shirt)
+
+  - if policy(TShirt).destroy?
+    = button_to "Destroy this t shirt", @t_shirt, method: :delete

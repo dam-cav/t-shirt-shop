@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
+#  seller                 :boolean          default(FALSE), not null
 #  wallet_money           :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

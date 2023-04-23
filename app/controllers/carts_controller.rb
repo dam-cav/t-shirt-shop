@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class CartsController < ApplicationController
+  after_action :verify_authorized
+
   def show
+    authorize :cart, :show?
+
     @user_cart_t_shirts = UserCartTShirt.includes(:t_shirt)
                                         .where(user_id: current_user.id)
 

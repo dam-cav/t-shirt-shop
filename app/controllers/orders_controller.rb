@@ -2,17 +2,22 @@
 
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show]
+  after_action :verify_authorized
 
   # GET /orders or /orders.json
   def index
+    authorize Order, :index?
     @orders = Order.where(user_id: current_user.id)
   end
 
   # GET /orders/1 or /orders/1.json
-  def show; end
+  def show
+    authorize @order, :show?
+  end
 
   # POST /orders or /orders.json
   def create
+    authorize Order, :create?
     result = VerifiedOrderGeneratorService.new(current_user:).run
 
     if result[:success] && result[:order]&.persisted?

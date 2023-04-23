@@ -15,9 +15,12 @@ table.index-table
       p = display_price(t_shirt.euro_price)
 
     td.shirt__index-cart
-      = simple_form_for :user_cart_t_shirt, url: update_cart_quantity_user_cart_t_shirts_path, remote: true, method: :post do |f|
-        = f.hidden_field :t_shirt_id, value: t_shirt.id
-        = f.input :quantity, as: :numeric, \
-                  input_html: { value: t_shirt.user_cart_t_shirts.find_by(user: current_user)&.quantity || 0 }
+      - if policy(UserCartTShirt).update_cart_quantity?
+        = simple_form_for :user_cart_t_shirt, url: update_cart_quantity_user_cart_t_shirts_path, remote: true, method: :post do |f|
+          = f.hidden_field :t_shirt_id, value: t_shirt.id
+          = f.input :quantity, as: :numeric, \
+                    input_html: { value: t_shirt.user_cart_t_shirts.find_by(user: current_user)&.quantity || 0 }
 
-        = f.button :submit, 'Salva'
+          = f.button :submit, 'Salva'
+      - else
+         = link_to 'Sign Up to buy', new_user_registration_path

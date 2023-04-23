@@ -3,9 +3,11 @@
 class TShirtsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_t_shirt, only: %i[show edit update destroy]
+  after_action :verify_authorized
 
   # GET /t_shirts or /t_shirts.json
   def index
+    authorize TShirt, :index?
     # TODO: se non sei un seller, filtra via quelle con quantità zero????
 
     t_shirts = TShirt.all
@@ -19,18 +21,26 @@ class TShirtsController < ApplicationController
   end
 
   # GET /t_shirts/1 or /t_shirts/1.json
-  def show; end
+  def show
+    authorize @t_shirt, :show?
+  end
 
   # GET /t_shirts/new
   def new
+    authorize TShirt, :new?
+
     @t_shirt = TShirt.new
   end
 
   # GET /t_shirts/1/edit
-  def edit; end
+  def edit
+    authorize @t_shirt, :edit?
+  end
 
   # POST /t_shirts or /t_shirts.json
   def create
+    authorize TShirt, :create?
+
     @t_shirt = TShirt.new(t_shirt_params)
 
     respond_to do |format|
@@ -46,6 +56,8 @@ class TShirtsController < ApplicationController
 
   # PATCH/PUT /t_shirts/1 or /t_shirts/1.json
   def update
+    authorize @t_shirt, :update?
+
     respond_to do |format|
       if @t_shirt.update(t_shirt_params)
         format.html { redirect_to t_shirt_url(@t_shirt), notice: 'T shirt was successfully updated.' }
@@ -59,6 +71,8 @@ class TShirtsController < ApplicationController
 
   # DELETE /t_shirts/1 or /t_shirts/1.json
   def destroy
+    authorize @t_shirt, :destroy?
+
     @t_shirt.destroy
 
     respond_to do |format|
