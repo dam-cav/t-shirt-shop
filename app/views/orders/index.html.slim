@@ -1,7 +1,12 @@
 h1 Orders
 
-#orders
-  - @orders.each do |order|
-    == render order
-    p
-      = link_to "Show this order", order
+table.index-table#orders
+  thead
+    tr
+      - @order_index_table_rows.each do |key|
+        td = key
+  tbody
+    - @orders.each do |order|
+      = render 'orders/index_order', order: order, rows: @order_index_table_rows
+
+== pagy_nav(@pagy)

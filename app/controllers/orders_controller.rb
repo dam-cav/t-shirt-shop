@@ -7,7 +7,26 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     authorize Order, :index?
-    @orders = Order.where(user_id: current_user.id)
+
+    orders = if current_user.seller?
+               Order.all
+                    .order(created_at: :desc)
+             else
+               Order.where(user_id: current_user.id)
+                    .order(created_at: :desc)
+             end
+
+    @pagy, @orders = pagy(orders)
+
+    @order_index_table_rows = %w[
+      id
+      user_email
+      confirmed_at
+      canceled_at
+      created_at
+      total_quantity
+      total_price
+    ].compact
   end
 
   # GET /orders/1 or /orders/1.json

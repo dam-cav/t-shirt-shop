@@ -1,0 +1,21 @@
+tr
+  / id
+  td = link_to order.id, order
+
+  / user_email
+  td = order.user.email
+
+  / confirmed_at
+  td = order.confirmed_at
+
+  / canceled_at
+  td = order.canceled_at
+
+  / created_at
+  td = order.created_at
+
+  / total_quantity
+  td = order.total_quantity
+
+  / total_price
+  td = display_euro_price(order.total_price)

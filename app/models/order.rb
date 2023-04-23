@@ -16,6 +16,7 @@
 #  index_orders_on_user_id  (user_id)
 #
 class Order < ApplicationRecord
+  belongs_to :user
   has_many :order_t_shirts, dependent: :destroy
 
   def total_quantity
