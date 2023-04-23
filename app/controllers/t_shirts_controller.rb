@@ -10,7 +10,9 @@ class TShirtsController < ApplicationController
     authorize TShirt, :index?
     # TODO: se non sei un seller, filtra via quelle con quantità zero????
 
-    t_shirts = TShirt.all
+    @q = TShirt.ransack(params[:q])
+    t_shirts = @q.result(distinct: true)
+
     # t_shirts = t_shirts.includes(:user_cart_t_shirts) unless current_user.nil?
     # unless current_user.nil?
     #   t_shirts = t_shirts.left_joins(:user_cart_t_shirts)

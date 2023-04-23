@@ -18,6 +18,10 @@ class TShirt < ApplicationRecord
 
   has_many :user_cart_t_shirts, dependent: :destroy
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[brand color price]
+  end
+
   def euro_price
     price.to_f / 100
   end

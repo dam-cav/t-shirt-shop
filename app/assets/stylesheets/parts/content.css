@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.search {
+  margin: 10px 0;
+}
+
 table.index-table {
   width: 100%;
   border-collapse: collapse;
