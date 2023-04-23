@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   resources :t_shirts
-  resources :orders, only: %i[index show create]
+  resources :orders, only: %i[index show create] do
+    post :confirm, on: :member
+    post :cancel, on: :member
+  end
 
   get '/cart', to: 'carts#show', as: 'cart_show'
 

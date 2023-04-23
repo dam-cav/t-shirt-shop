@@ -26,4 +26,8 @@ class Order < ApplicationRecord
   def total_price
     order_t_shirts.sum { |o_t_s| o_t_s.final_price * o_t_s.quantity }
   end
+
+  def completed?
+    canceled_at? || confirmed_at?
+  end
 end

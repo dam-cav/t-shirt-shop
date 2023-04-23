@@ -3,4 +3,8 @@ h1 Order ##{@order.id}
 == render @order
 
 div
+  - unless @order.completed?
+    =< link_to "Confirm order", confirm_order_path, data: {'turbo-method': :post}
+    =< link_to "Cancel order", cancel_order_path, data: {'turbo-method': :post}
+
   =< link_to "Back to orders", orders_path

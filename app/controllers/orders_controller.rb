@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show]
+  before_action :set_order, only: %i[show confirm cancel]
   after_action :verify_authorized
 
   # GET /orders or /orders.json
@@ -44,6 +44,26 @@ class OrdersController < ApplicationController
     else
       redirect_to cart_show_url, status: :unprocessable_entity, alert: result[:message]
     end
+  end
+
+  def confirm
+    authorize @order, :confirm?
+
+    @order.update(confirmed_at: Time.current)
+
+    redirect_to order_url(@order), notice: 'Order was successfully confirmed.'
+  end
+
+  def cancel
+    authorize @order, :cancel?
+
+    order_user = @order.user
+    ActiveRecord::Base.transaction do
+      @order.update(canceled_at: Time.current)
+      order_user.update!(wallet_money: order_user.wallet_money + @order.total_price)
+    end
+
+    redirect_to order_url(@order), notice: 'Order was successfully canceled.'
   end
 
   private

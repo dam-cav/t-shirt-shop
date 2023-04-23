@@ -12,4 +12,12 @@ class OrderPolicy < ApplicationPolicy
   def create?
     user.present?
   end
+
+  def confirm?
+    user.present? && user.seller? && !record.completed?
+  end
+
+  def cancel?
+    user.present? && user.seller? && !record.completed?
+  end
 end
