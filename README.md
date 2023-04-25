@@ -1,5 +1,7 @@
 # t-shirt-shop
 
+A super simple example of a ruby ​​on rails based t-shirt e-commerce
+
 ## Project setup
 
 - install the correct ruby version (see `.ruby-version` file)
