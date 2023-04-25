@@ -12,12 +12,7 @@ class TShirtsController < ApplicationController
 
     @q = TShirt.ransack(params[:q])
     t_shirts = @q.result(distinct: true)
-
-    # t_shirts = t_shirts.includes(:user_cart_t_shirts) unless current_user.nil?
-    # unless current_user.nil?
-    #   t_shirts = t_shirts.left_joins(:user_cart_t_shirts)
-    #                      .where('user_cart_t_shirts.user_id = ? OR user_cart_t_shirts.user_id IS NULL', current_user.id)
-    # end
+                 .catalog_sort
 
     @pagy, @t_shirts = pagy(t_shirts)
   end

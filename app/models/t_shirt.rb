@@ -18,6 +18,12 @@ class TShirt < ApplicationRecord
 
   has_many :user_cart_t_shirts, dependent: :destroy
 
+  # out of stock products go to the bottom even if more recent
+  scope :catalog_sort, lambda {
+    order(Arel.sql('case when quantity = 0 then 1 else 0 end'))
+      .order(created_at: :desc)
+  }
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[brand color price]
   end
