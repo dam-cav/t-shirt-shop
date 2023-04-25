@@ -11,3 +11,13 @@ Style/Documentation:
 # I want to bulk change in some migrations
 Rails/BulkChangeTable:
   Enabled: false
+
+# Ignore annoying warnings from vscode's rubocop plugin
+Metrics/AbcSize:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false
