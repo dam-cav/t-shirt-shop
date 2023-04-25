@@ -8,8 +8,8 @@ A super simple example of a ruby ​​on rails based t-shirt e-commerce
 - install the correct node versione (see `.nvmrc`)
 - run `bundle install` to install ruby gems
 - run `yarn install` to install node_modules
-- check that `config/database.yml` contains the correct settings for your db (You can setup one using the `docker-compose.yml` file insluded in the project root)
-- run `rails db:create`, then `rails dm:migrate`
+- check that `config/database.yml` contains the correct settings for your db (You can setup one using the `docker-compose.yml` file included in the project root, run it with `docker-compose up`)
+- run `rails db:create`, then `rails db:migrate`
 
 ## Run the project for development
 
