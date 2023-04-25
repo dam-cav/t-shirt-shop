@@ -58,9 +58,14 @@ class OrdersController < ApplicationController
     authorize @order, :cancel?
 
     order_user = @order.user
-    ActiveRecord::Base.transaction do
+    # prevent cuncurrent wallet_money update
+    order_user.with_lock do
       @order.update(canceled_at: Time.current)
       order_user.update!(wallet_money: order_user.wallet_money + @order.total_price)
+
+      # NOTE:
+      # it might make sense to re-add the quantities of products in the catalog as well,
+      # but if an order is canceled by the seller it is likely due to the actual lack of products
     end
 
     redirect_to order_url(@order), notice: 'Order was successfully canceled.'

@@ -10,15 +10,20 @@ class VerifiedOrderGeneratorService
     message = nil
     new_order = nil
 
-    ActiveRecord::Base.transaction do
+    # prevent cuncurrent wallet_money update
+    @current_user.with_lock do
       current_user_cart_t_shirt = UserCartTShirt.where(user_id: @current_user.id)
+
+      user_cart_t_shirt_ids = current_user_cart_t_shirt.pluck(:t_shirt_id)
+      # prevent cuncurrent quantity update
+      TShirt.where(id: user_cart_t_shirt_ids).select('id').lock!.to_a
 
       raise 'nothing to buy' if current_user_cart_t_shirt.count < 1
 
       # check available quantities
       invalid_quantities_in_cart = VerifiedOrderGeneratorService.invalid_quantities_in_cart_count(
         current_user: @current_user,
-        t_shirt_ids: current_user_cart_t_shirt.pluck(:t_shirt_id)
+        t_shirt_ids: user_cart_t_shirt_ids
       ).positive?
       raise 'the requested quantities are not available' if invalid_quantities_in_cart
 
