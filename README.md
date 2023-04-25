@@ -1,24 +1,15 @@
-# README
+# t-shirt-shop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project setup
 
-Things you may want to cover:
+- install the correct ruby version (see `.ruby-version` file)
+- install the correct node versione (see `.nvmrc`)
+- run `bundle install` to install ruby gems
+- run `yarn install` to install node_modules
+- check that `config/database.yml` contains the correct settings for your db (You can setup one using the `docker-compose.yml` file insluded in the project root)
+- run `rails db:create`, then `rails dm:migrate`
 
-* Ruby version
+## Run the project for development
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- you may want to run `rails db:seed` to generate example data
+- run `bin/dev`
