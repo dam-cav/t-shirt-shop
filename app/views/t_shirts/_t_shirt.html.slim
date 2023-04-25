@@ -5,11 +5,17 @@ table.index-table
 
     td.shirt__index-info
       = link_to t_shirt.name, t_shirt
-      P = t_shirt.brand
-      p = t_shirt.color
+      - if t_shirt.brand.present?
+        p
+          | Brand:
+          =< t_shirt.brand
+      - if t_shirt.color.present?
+        p
+          | Color:
+          =< t_shirt.color
       p
         = t_shirt.quantity
-        | &nbsp;disponibili
+        | &nbsp;available
 
     td.shirt__index-price
       p = display_price(t_shirt.euro_price)
