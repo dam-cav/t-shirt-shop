@@ -4,14 +4,14 @@ table.index-table#t_shirts
   - @user_cart_t_shirts.each do |user_cart_t_shirt|
     = render 'carts/cart_t_shirt', user_cart_t_shirt: user_cart_t_shirt
 
-p TOTALE
+p TOTAL
 p = display_euro_price(@total)
 
 - if @user_cart_t_shirts.length > 0 && @warnings.length == 0
   = link_to 'Compra', orders_path, data: {'turbo-method': :post}
 - else
   - @warnings.each do |warning|
-    p = warning
+    p.warning = warning
 
 
 javascript:

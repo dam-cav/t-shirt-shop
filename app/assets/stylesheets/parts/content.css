@@ -4,8 +4,16 @@
   margin: auto;
 }
 
-.search {
+.search-bar {
   margin: 10px 0;
+}
+
+.warning {
+  color: red
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 table.index-table {
